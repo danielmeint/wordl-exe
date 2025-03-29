@@ -1,4 +1,5 @@
 from wordle import load_words, is_valid_word, print_colored_guess
+from colorama import Fore, Style
 
 
 def test_load_words():
@@ -23,26 +24,32 @@ def test_is_valid_word():
 
 def test_print_colored_guess(capsys):
     """Test the colored output of guesses."""
-    # Test correct letter in correct position
+    # Test all correct (all green)
     print_colored_guess("APPLE", "APPLE")
     captured = capsys.readouterr()
-    assert "A" in captured.out
-    assert "P" in captured.out
-    assert "L" in captured.out
-    assert "E" in captured.out
+    expected = (
+        f"{Fore.GREEN}A {Fore.GREEN}P {Fore.GREEN}P {Fore.GREEN}L {Fore.GREEN}E "
+        f"{Style.RESET_ALL}\n"
+    )
+    assert captured.out == expected
 
-    # Test correct letter in wrong position
+    # Test mixed positions with repeated letters
+    # PAPER has two P's, so both P's in APPLE should be marked:
+    # - First P: yellow (exists but wrong position)
+    # - Second P: green (correct position)
     print_colored_guess("APPLE", "PAPER")
     captured = capsys.readouterr()
-    assert "A" in captured.out
-    assert "P" in captured.out
-    assert "L" in captured.out
-    assert "E" in captured.out
+    expected = (
+        f"{Fore.YELLOW}A {Fore.YELLOW}P {Fore.GREEN}P {Fore.WHITE}L {Fore.YELLOW}E "
+        f"{Style.RESET_ALL}\n"
+    )
+    assert captured.out == expected
 
-    # Test letter not in word
+    # Test no matches (all white)
     print_colored_guess("APPLE", "STORM")
     captured = capsys.readouterr()
-    assert "A" in captured.out
-    assert "P" in captured.out
-    assert "L" in captured.out
-    assert "E" in captured.out
+    expected = (
+        f"{Fore.WHITE}A {Fore.WHITE}P {Fore.WHITE}P {Fore.WHITE}L {Fore.WHITE}E "
+        f"{Style.RESET_ALL}\n"
+    )
+    assert captured.out == expected

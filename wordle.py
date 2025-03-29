@@ -27,13 +27,32 @@ SOLUTION_WORDS = load_words("solutions.txt")  # Words that can be solutions
 
 def print_colored_guess(guess, target):
     """Print the guess with color-coded feedback."""
-    for i, (g, t) in enumerate(zip(guess, target)):
+    # Convert to lists for easier manipulation
+    guess_chars = list(guess)
+    target_chars = list(target)
+    colors = [None] * len(guess)
+
+    # First pass: mark exact matches
+    for i, (g, t) in enumerate(zip(guess_chars, target_chars)):
         if g == t:
-            print(f"{Fore.GREEN}{g}", end=" ")
-        elif g in target:
-            print(f"{Fore.YELLOW}{g}", end=" ")
+            colors[i] = Fore.GREEN
+            target_chars[i] = None  # Mark as used
+
+    # Second pass: mark yellow and white
+    for i, g in enumerate(guess_chars):
+        if colors[i] is not None:
+            continue
+
+        # Check if the letter exists in remaining positions
+        if g in target_chars:
+            colors[i] = Fore.YELLOW
+            target_chars[target_chars.index(g)] = None  # Mark as used
         else:
-            print(f"{Fore.WHITE}{g}", end=" ")
+            colors[i] = Fore.WHITE
+
+    # Print the colored guess
+    for color, letter in zip(colors, guess):
+        print(f"{color}{letter}", end=" ")
     print(Style.RESET_ALL)
 
 
