@@ -43,6 +43,41 @@ The game uses two word lists:
 - `words.txt`: All valid 5-letter words that can be used as guesses (~15k words)
 - `solutions.txt`: Common 5-letter words that can be chosen as solutions (~5.7k words)
 
+## Development
+
+### Code Style
+
+This project uses:
+- `black` for code formatting
+- `flake8` for linting
+- `pytest` for testing
+
+To format code:
+```bash
+black .
+```
+
+To run linting:
+```bash
+flake8
+```
+
+To run tests:
+```bash
+pytest
+```
+
+### CI/CD
+
+GitHub Actions workflows are set up for:
+- Code linting and formatting checks
+- Running tests
+- Validating word lists
+
+These checks run automatically on:
+- Push to main branch
+- Pull requests
+
 ## Future Improvements
 
 - [ ] Daily word mode (same word for everyone on a given day)
