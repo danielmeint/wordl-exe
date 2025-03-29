@@ -1,5 +1,10 @@
 # Terminal Wordle
 
+[![Lint](https://github.com/danielmeint/wordl-exe/actions/workflows/lint.yml/badge.svg)](https://github.com/danielmeint/wordl-exe/actions/workflows/lint.yml)
+[![Test](https://github.com/danielmeint/wordl-exe/actions/workflows/test.yml/badge.svg)](https://github.com/danielmeint/wordl-exe/actions/workflows/test.yml)
+[![Validate Words](https://github.com/danielmeint/wordl-exe/actions/workflows/validate_words.yml/badge.svg)](https://github.com/danielmeint/wordl-exe/actions/workflows/validate_words.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A Python-based Wordle clone that runs in the terminal, featuring color-coded feedback for your guesses.
 
 ## Features
