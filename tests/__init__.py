@@ -1,1 +1,1 @@
-"""Test package for the Wordle game.""" 
+"""Test package for the Wordle game."""
